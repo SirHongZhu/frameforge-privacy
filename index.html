@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy - FrameForge</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card: #1a1a2e;
+    --accent: #7C4DFF;
+    --text: #e0e0e0;
+    --muted: #888;
+    --border: #2a2a3e;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f0f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .header .accent { color: var(--accent); }
+  .header .updated {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  .section {
+    margin-bottom: 36px;
+  }
+  .section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  .section p {
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .section ul {
+    margin-left: 20px;
+    margin-bottom: 12px;
+  }
+  .section ul li {
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .highlight-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .highlight-box strong {
+    color: var(--accent);
+  }
+  .permission-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 12px 0;
+  }
+  .permission-card h3 {
+    color: var(--accent);
+    margin-top: 0;
+  }
+  .permission-card .detail {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 16px;
+    margin-top: 12px;
+  }
+  .permission-card .detail dt {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .permission-card .detail dd {
+    color: var(--text);
+    font-size: 14px;
+  }
+  .no-list li {
+    list-style: none;
+    position: relative;
+    padding-left: 24px;
+  }
+  .no-list li::before {
+    content: "✕";
+    position: absolute;
+    left: 0;
+    color: #ff5252;
+    font-weight: bold;
+  }
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Privacy Policy — <span class="accent">FrameForge</span></h1>
+  <p class="updated">Last updated: August 9, 2026</p>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <h2>Overview</h2>
+    <div class="highlight-box">
+      <p><strong>FrameForge does NOT collect, store, or transmit any personal data.</strong></p>
+      <p style="margin-bottom:0">All image processing happens entirely within your browser. Your photos, EXIF data, and editing preferences never leave your device.</p>
+    </div>
+    <p>FrameForge is a Chrome browser extension that adds professional camera-style frames to photos and displays EXIF shooting parameters. We are committed to protecting your privacy.</p>
+  </div>
+
+  <div class="section">
+    <h2>Permissions Explained</h2>
+
+    <div class="permission-card">
+      <h3>storage</h3>
+      <p>Used to save your editor preferences on your device.</p>
+      <dl class="detail">
+        <dt>Purpose:</dt><dd>Save editor preferences (selected template, export settings, custom text presets)</dd>
+        <dt>Data stored:</dt><dd>Template ID, font settings, color values, export format preferences</dd>
+        <dt>Location:</dt><dd>Chrome's local storage on your device only</dd>
+        <dt>Transmitted:</dt><dd>Nothing is transmitted to any server</dd>
+      </dl>
+    </div>
+
+    <div class="permission-card">
+      <h3>unlimitedStorage</h3>
+      <p>Required to temporarily store high-resolution photos (up to 50MB) when passing images between extension pages.</p>
+      <dl class="detail">
+        <dt>Purpose:</dt><dd>Allow chrome.storage.local to exceed the default 10MB quota for large photos</dd>
+        <dt>Data stored:</dt><dd>Photo image data (temporary, cleared after processing)</dd>
+        <dt>Location:</dt><dd>Chrome's local storage on your device only</dd>
+        <dt>Transmitted:</dt><dd>Nothing is transmitted to any server</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>What We Do NOT Do</h2>
+    <ul class="no-list">
+      <li>We do NOT collect personal information</li>
+      <li>We do NOT track usage analytics</li>
+      <li>We do NOT use cookies or tracking pixels</li>
+      <li>We do NOT sell or share data with third parties</li>
+      <li>We do NOT upload your photos to any server</li>
+      <li>We do NOT require account registration</li>
+      <li>We do NOT use third-party advertising SDKs</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Third-Party Services</h2>
+    <p>FrameForge does not use any third-party services. All processing happens entirely within your browser with no external API calls.</p>
+  </div>
+
+  <div class="section">
+    <h2>Data Security</h2>
+    <p>Since all processing occurs locally in your browser and no data is transmitted (except the optional GPS lookup), there is minimal security risk. Your photos never leave your device.</p>
+  </div>
+
+  <div class="section">
+    <h2>Children's Privacy</h2>
+    <p>FrameForge is not directed at children under 13. We do not knowingly collect any data from anyone, including children.</p>
+  </div>
+
+  <div class="section">
+    <h2>Changes to This Policy</h2>
+    <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated date.</p>
+  </div>
+
+  <div class="section">
+    <h2>Contact</h2>
+    <p>If you have questions about this privacy policy, please contact us at: <strong>zhuhong02199@gmail.com</strong></p>
+  </div>
+
+  <div class="section">
+    <h2>Open Source</h2>
+    <p>FrameForge respects open-source licenses. The extension uses the following open-source libraries:</p>
+    <ul>
+      <li>Vue.js (MIT License)</li>
+      <li>exifr (MIT License)</li>
+      <li>JSZip (MIT License)</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 FrameForge. All rights reserved.
+</div>
+
+</body>
+</html>
