@@ -8,74 +8,86 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#fff;--bg2:#f7f7f8;--surface:#fff;--border:#e8e8ec;
-  --text:#1a1a2e;--text2:#555;--text3:#999;
-  --accent:#7C4DFF;--accent-light:#f0ebff;--accent2:#6236cc;
-  --radius:14px;--radius-sm:10px;
-  --shadow:0 2px 12px rgba(0,0,0,.06);--shadow-lg:0 8px 32px rgba(0,0,0,.08);
+  --bg:#fafafa;--bg2:#f0f0f3;--surface:#fff;--border:#e4e4ea;
+  --text:#111;--text2:#444;--text3:#999;
+  --accent:#6C3CE8;--accent-soft:rgba(108,60,232,.07);--accent2:#5228c4;
+  --orange:#FF8C21;
+  --r:16px;--r-sm:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.04),0 4px 14px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 40px rgba(0,0,0,.08);
 }
-html{scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden}
-a{color:var(--accent);text-decoration:none;transition:color .2s}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;font-size:16px}
+a{color:var(--accent);text-decoration:none;transition:color .25s}
 a:hover{color:var(--accent2)}
 
 /* Nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,.72);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-bottom-color:var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
 .nav-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.3px;color:var(--text)}
-.nav-brand svg{width:30px;height:30px}
-.nav-right{display:flex;align-items:center;gap:20px}
-.nav-links{display:flex;gap:24px;font-size:14px}
-.nav-links a{color:var(--text2);transition:color .2s;font-weight:500}
+.nav-brand svg{width:28px;height:28px}
+.nav-right{display:flex;align-items:center;gap:22px}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500}
+.nav-links a{color:var(--text2);transition:color .25s;position:relative}
 .nav-links a:hover{color:var(--accent)}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--accent);border-radius:1px;transition:width .3s cubic-bezier(.16,1,.3,1)}
+.nav-links a:hover::after{width:100%}
 
 /* Lang toggle */
-.lang-toggle{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--border);font-size:13px;font-weight:500}
-.lang-toggle button{padding:5px 12px;border:none;background:transparent;color:var(--text3);cursor:pointer;transition:all .2s}
+.lang-toggle{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--border);font-size:13px;font-weight:600}
+.lang-toggle button{padding:5px 14px;border:none;background:transparent;color:var(--text3);cursor:pointer;transition:all .25s}
 .lang-toggle button.active{background:var(--accent);color:#fff}
-.lang-toggle button:hover:not(.active){background:var(--bg2)}
+.lang-toggle button:hover:not(.active){background:var(--accent-soft);color:var(--accent)}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
 /* Header */
-.page-header{padding:120px 24px 48px;text-align:center;background:linear-gradient(180deg,#fff 0%,var(--bg2) 100%)}
-.page-header h1{font-size:clamp(24px,4vw,36px);font-weight:700;margin-bottom:8px}
+.page-header{padding:120px 28px 48px;text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#fafafa 0%,var(--bg2) 100%)}
+.page-header::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(108,60,232,.05) 0%,transparent 60%);pointer-events:none}
+.page-header h1{font-size:clamp(24px,4vw,36px);font-weight:800;margin-bottom:8px;letter-spacing:-.02em;position:relative;z-index:1}
 .page-header h1 em{font-style:normal;color:var(--accent)}
-.page-header .updated{color:var(--text3);font-size:14px}
+.page-header .updated{color:var(--text3);font-size:14px;position:relative;z-index:1}
 
 /* Container */
-.container{max-width:760px;margin:0 auto;padding:40px 24px 80px}
+.container{max-width:740px;margin:0 auto;padding:40px 28px 80px}
 
 /* Section */
-.section{margin-bottom:40px}
-.section h2{font-size:20px;font-weight:700;color:var(--accent2);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border)}
-.section h3{font-size:16px;font-weight:600;color:var(--text);margin-top:20px;margin-bottom:8px}
-.section p{margin-bottom:12px;color:var(--text2)}
+.section{margin-bottom:48px}
+.section h2{font-size:20px;font-weight:700;color:var(--text);margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--border);letter-spacing:-.01em}
+.section p{margin-bottom:14px;color:var(--text2)}
 
 /* Highlight box */
-.highlight-box{background:var(--accent-light);border:1px solid rgba(124,77,255,.15);border-radius:var(--radius);padding:20px 24px;margin:16px 0}
+.highlight-box{background:var(--accent-soft);border:1px solid rgba(108,60,232,.12);border-radius:var(--r);padding:22px 28px;margin:20px 0;position:relative;overflow:hidden}
+.highlight-box::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--orange))}
 .highlight-box strong{color:var(--accent2)}
 
 /* Permission card */
-.permission-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin:12px 0;box-shadow:var(--shadow);transition:border-color .3s,box-shadow .3s}
-.permission-card:hover{border-color:rgba(124,77,255,.3);box-shadow:var(--shadow-lg)}
-.permission-card h3{color:var(--accent2);margin-top:0}
-.permission-card .detail{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin-top:12px}
+.permission-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;margin:16px 0;box-shadow:var(--shadow);transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s;position:relative;overflow:hidden}
+.permission-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--orange));opacity:0;transition:opacity .4s}
+.permission-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:transparent}
+.permission-card:hover::before{opacity:1}
+.permission-card h3{color:var(--accent2);margin-top:0;font-size:17px;font-weight:700}
+.permission-card .detail{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;margin-top:14px}
 .permission-card .detail dt{color:var(--text3);font-weight:600;font-size:14px}
 .permission-card .detail dd{color:var(--text2);font-size:14px}
 
 /* No-list */
 .no-list{list-style:none;margin-left:0}
-.no-list li{position:relative;padding-left:28px;margin-bottom:10px}
-.no-list li::before{content:'';position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;background:#ffe0e0;display:flex;align-items:center;justify-content:center}
-.no-list li::after{content:'✕';position:absolute;left:3px;top:5px;font-size:11px;font-weight:700;color:#e53935}
+.no-list li{position:relative;padding-left:32px;margin-bottom:12px;color:var(--text2)}
+.no-list li::before{content:'';position:absolute;left:0;top:6px;width:20px;height:20px;border-radius:6px;background:#fff0f0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(229,57,53,.1)}
+.no-list li::after{content:'';position:absolute;left:6px;top:12px;width:8px;height:8px;border-radius:50%;background:#e53935}
 
 /* Yes-list */
 .yes-list{list-style:none;margin-left:0}
-.yes-list li{position:relative;padding-left:28px;margin-bottom:10px}
-.yes-list li::before{content:'';position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;background:var(--accent-light)}
-.yes-list li::after{content:'✓';position:absolute;left:3.5px;top:5px;font-size:11px;font-weight:700;color:var(--accent2)}
+.yes-list li{position:relative;padding-left:32px;margin-bottom:12px;color:var(--text2)}
+.yes-list li::before{content:'';position:absolute;left:0;top:6px;width:20px;height:20px;border-radius:6px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;border:1px solid rgba(108,60,232,.08)}
+.yes-list li::after{content:'';position:absolute;left:5.5px;top:11.5px;width:9px;height:5px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
 
 /* Footer */
-.footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text3);font-size:13px;background:var(--bg2)}
+.footer{border-top:1px solid var(--border);padding:36px 28px;text-align:center;color:var(--text3);font-size:13px;background:var(--bg2);font-weight:500}
 .footer a{color:var(--text2);transition:color .2s}
 .footer a:hover{color:var(--accent)}
 
@@ -89,10 +101,10 @@ a:hover{color:var(--accent2)}
 <body>
 
 <!-- Nav -->
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="https://sirhongzhu.github.io/frameforge-landing/" class="nav-brand">
-      <svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="6" fill="#7C4DFF"/><rect x="6" y="6" width="20" height="20" rx="3" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M20 22l4-4v6h-6z" fill="#FF9500"/></svg>
+      <svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="6" fill="#6C3CE8"/><rect x="6" y="6" width="20" height="20" rx="3" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M20 22l4-4v6h-6z" fill="#FF8C21"/></svg>
       FrameForge
     </a>
     <div class="nav-right">
@@ -110,14 +122,14 @@ a:hover{color:var(--accent2)}
 
 <!-- Header -->
 <div class="page-header">
-  <h1 data-i18n-html="header_title">隐私政策 — <em>FrameForge</em></h1>
-  <p class="updated" data-i18n="header_updated">最后更新：2026 年 8 月 9 日</p>
+  <h1 class="reveal" data-i18n-html="header_title">隐私政策 — <em>FrameForge</em></h1>
+  <p class="updated reveal" data-i18n="header_updated">最后更新：2026 年 8 月 9 日</p>
 </div>
 
 <div class="container">
 
   <!-- Overview -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s1_title">概述</h2>
     <div class="highlight-box">
       <p><strong data-i18n="s1_highlight">FrameForge 不收集、不存储、不传输任何个人数据。</strong></p>
@@ -127,7 +139,7 @@ a:hover{color:var(--accent2)}
   </div>
 
   <!-- Permissions -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s2_title">权限说明</h2>
 
     <div class="permission-card">
@@ -162,7 +174,7 @@ a:hover{color:var(--accent2)}
   </div>
 
   <!-- What we do NOT do -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s3_title">我们不做的事</h2>
     <ul class="no-list">
       <li data-i18n="no1">不收集个人信息</li>
@@ -176,37 +188,37 @@ a:hover{color:var(--accent2)}
   </div>
 
   <!-- Third-Party Services -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s4_title">第三方服务</h2>
     <p data-i18n="s4_desc">FrameForge 不使用任何第三方服务。所有处理完全在您的浏览器中完成，不进行任何外部 API 调用。</p>
   </div>
 
   <!-- Data Security -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s5_title">数据安全</h2>
     <p data-i18n="s5_desc">由于所有处理均在您的浏览器本地完成，且不传输任何数据，因此安全风险极低。您的照片从未离开您的设备。</p>
   </div>
 
   <!-- Children's Privacy -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s6_title">儿童隐私</h2>
     <p data-i18n="s6_desc">FrameForge 并非面向 13 岁以下儿童。我们不会有意收集任何人的数据，包括儿童。</p>
   </div>
 
   <!-- Changes -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s7_title">政策变更</h2>
     <p data-i18n="s7_desc">我们可能会不时更新本隐私政策。任何变更将在此页面上发布，并更新日期。</p>
   </div>
 
   <!-- Contact -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s8_title">联系方式</h2>
     <p data-i18n-html="s8_desc">如果您对本隐私政策有任何疑问，请通过以下邮箱联系我们：<strong>zhuhong02199@gmail.com</strong></p>
   </div>
 
   <!-- Open Source -->
-  <div class="section">
+  <div class="section reveal">
     <h2 data-i18n="s9_title">开源许可</h2>
     <p data-i18n="s9_desc">FrameForge 尊重开源许可。本扩展使用了以下开源库：</p>
     <ul class="yes-list">
@@ -224,91 +236,26 @@ a:hover{color:var(--accent2)}
 </footer>
 
 <script>
-const i18n = {
-  zh: {
-    nav_home: '首页', nav_install: '安装扩展',
-    header_title: '隐私政策 — <em>FrameForge</em>',
-    header_updated: '最后更新：2026 年 8 月 9 日',
-    s1_title: '概述',
-    s1_highlight: 'FrameForge 不收集、不存储、不传输任何个人数据。',
-    s1_highlight_sub: '所有图片处理完全在您的浏览器中完成。您的照片、EXIF 数据和编辑偏好从未离开您的设备。',
-    s1_desc: 'FrameForge 是一款 Chrome 浏览器扩展，用于为照片添加专业相机风格边框并展示 EXIF 拍摄参数。我们致力于保护您的隐私。',
-    s2_title: '权限说明',
-    perm1_desc: '用于在您的设备上保存编辑器偏好设置。',
-    perm1_purpose: '保存编辑器偏好（选中的模板、导出设置、自定义文本预设）',
-    perm1_data: '模板 ID、字体设置、颜色值、导出格式偏好',
-    perm1_location: '仅存储在您设备的 Chrome 本地存储中',
-    perm1_transmit: '不向任何服务器传输任何数据',
-    perm2_desc: '用于在扩展页面间传递高分辨率照片时，临时存储大文件（最高 50MB）。',
-    perm2_purpose: '允许 chrome.storage.local 超过默认 10MB 配额以处理大尺寸照片',
-    perm2_data: '照片图片数据（临时存储，处理完成后清除）',
-    perm2_location: '仅存储在您设备的 Chrome 本地存储中',
-    perm2_transmit: '不向任何服务器传输任何数据',
-    dt_purpose: '用途：', dt_data: '数据：', dt_location: '存储位置：', dt_transmit: '是否传输：',
-    s3_title: '我们不做的事',
-    no1: '不收集个人信息', no2: '不追踪使用分析', no3: '不使用 Cookie 或跟踪像素',
-    no4: '不出售或与第三方共享数据', no5: '不上传您的照片到任何服务器',
-    no6: '不要求注册账号', no7: '不使用第三方广告 SDK',
-    s4_title: '第三方服务', s4_desc: 'FrameForge 不使用任何第三方服务。所有处理完全在您的浏览器中完成，不进行任何外部 API 调用。',
-    s5_title: '数据安全', s5_desc: '由于所有处理均在您的浏览器本地完成，且不传输任何数据，因此安全风险极低。您的照片从未离开您的设备。',
-    s6_title: '儿童隐私', s6_desc: 'FrameForge 并非面向 13 岁以下儿童。我们不会有意收集任何人的数据，包括儿童。',
-    s7_title: '政策变更', s7_desc: '我们可能会不时更新本隐私政策。任何变更将在此页面上发布，并更新日期。',
-    s8_title: '联系方式', s8_desc: '如果您对本隐私政策有任何疑问，请通过以下邮箱联系我们：<strong>zhuhong02199@gmail.com</strong>',
-    s9_title: '开源许可', s9_desc: 'FrameForge 尊重开源许可。本扩展使用了以下开源库：',
-    footer_rights: '保留所有权利。'
-  },
-  en: {
-    nav_home: 'Home', nav_install: 'Install',
-    header_title: 'Privacy Policy — <em>FrameForge</em>',
-    header_updated: 'Last updated: August 9, 2026',
-    s1_title: 'Overview',
-    s1_highlight: 'FrameForge does NOT collect, store, or transmit any personal data.',
-    s1_highlight_sub: 'All image processing happens entirely within your browser. Your photos, EXIF data, and editing preferences never leave your device.',
-    s1_desc: 'FrameForge is a Chrome browser extension that adds professional camera-style frames to photos and displays EXIF shooting parameters. We are committed to protecting your privacy.',
-    s2_title: 'Permissions Explained',
-    perm1_desc: 'Used to save your editor preferences on your device.',
-    perm1_purpose: 'Save editor preferences (selected template, export settings, custom text presets)',
-    perm1_data: 'Template ID, font settings, color values, export format preferences',
-    perm1_location: "Chrome's local storage on your device only",
-    perm1_transmit: 'Nothing is transmitted to any server',
-    perm2_desc: 'Required to temporarily store high-resolution photos (up to 50MB) when passing images between extension pages.',
-    perm2_purpose: 'Allow chrome.storage.local to exceed the default 10MB quota for large photos',
-    perm2_data: 'Photo image data (temporary, cleared after processing)',
-    perm2_location: "Chrome's local storage on your device only",
-    perm2_transmit: 'Nothing is transmitted to any server',
-    dt_purpose: 'Purpose:', dt_data: 'Data stored:', dt_location: 'Location:', dt_transmit: 'Transmitted:',
-    s3_title: 'What We Do NOT Do',
-    no1: 'We do NOT collect personal information', no2: 'We do NOT track usage analytics',
-    no3: 'We do NOT use cookies or tracking pixels', no4: 'We do NOT sell or share data with third parties',
-    no5: 'We do NOT upload your photos to any server', no6: 'We do NOT require account registration',
-    no7: 'We do NOT use third-party advertising SDKs',
-    s4_title: 'Third-Party Services', s4_desc: 'FrameForge does not use any third-party services. All processing happens entirely within your browser with no external API calls.',
-    s5_title: 'Data Security', s5_desc: 'Since all processing occurs locally in your browser and no data is transmitted, there is minimal security risk. Your photos never leave your device.',
-    s6_title: "Children's Privacy", s6_desc: 'FrameForge is not directed at children under 13. We do not knowingly collect any data from anyone, including children.',
-    s7_title: 'Changes to This Policy', s7_desc: 'We may update this privacy policy from time to time. Any changes will be posted on this page with an updated date.',
-    s8_title: 'Contact', s8_desc: 'If you have questions about this privacy policy, please contact us at: <strong>zhuhong02199@gmail.com</strong>',
-    s9_title: 'Open Source', s9_desc: 'FrameForge respects open-source licenses. The extension uses the following open-source libraries:',
-    footer_rights: 'All rights reserved.'
-  }
-};
+const i18n={zh:{nav_home:'首页',nav_install:'安装扩展',header_title:'隐私政策 — <em>FrameForge</em>',header_updated:'最后更新：2026 年 8 月 9 日',s1_title:'概述',s1_highlight:'FrameForge 不收集、不存储、不传输任何个人数据。',s1_highlight_sub:'所有图片处理完全在您的浏览器中完成。您的照片、EXIF 数据和编辑偏好从未离开您的设备。',s1_desc:'FrameForge 是一款 Chrome 浏览器扩展，用于为照片添加专业相机风格边框并展示 EXIF 拍摄参数。我们致力于保护您的隐私。',s2_title:'权限说明',perm1_desc:'用于在您的设备上保存编辑器偏好设置。',perm1_purpose:'保存编辑器偏好（选中的模板、导出设置、自定义文本预设）',perm1_data:'模板 ID、字体设置、颜色值、导出格式偏好',perm1_location:'仅存储在您设备的 Chrome 本地存储中',perm1_transmit:'不向任何服务器传输任何数据',perm2_desc:'用于在扩展页面间传递高分辨率照片时，临时存储大文件（最高 50MB）。',perm2_purpose:'允许 chrome.storage.local 超过默认 10MB 配额以处理大尺寸照片',perm2_data:'照片图片数据（临时存储，处理完成后清除）',perm2_location:'仅存储在您设备的 Chrome 本地存储中',perm2_transmit:'不向任何服务器传输任何数据',dt_purpose:'用途：',dt_data:'数据：',dt_location:'存储位置：',dt_transmit:'是否传输：',s3_title:'我们不做的事',no1:'不收集个人信息',no2:'不追踪使用分析',no3:'不使用 Cookie 或跟踪像素',no4:'不出售或与第三方共享数据',no5:'不上传您的照片到任何服务器',no6:'不要求注册账号',no7:'不使用第三方广告 SDK',s4_title:'第三方服务',s4_desc:'FrameForge 不使用任何第三方服务。所有处理完全在您的浏览器中完成，不进行任何外部 API 调用。',s5_title:'数据安全',s5_desc:'由于所有处理均在您的浏览器本地完成，且不传输任何数据，因此安全风险极低。您的照片从未离开您的设备。',s6_title:'儿童隐私',s6_desc:'FrameForge 并非面向 13 岁以下儿童。我们不会有意收集任何人的数据，包括儿童。',s7_title:'政策变更',s7_desc:'我们可能会不时更新本隐私政策。任何变更将在此页面上发布，并更新日期。',s8_title:'联系方式',s8_desc:'如果您对本隐私政策有任何疑问，请通过以下邮箱联系我们：<strong>zhuhong02199@gmail.com</strong>',s9_title:'开源许可',s9_desc:'FrameForge 尊重开源许可。本扩展使用了以下开源库：',footer_rights:'保留所有权利。'},en:{nav_home:'Home',nav_install:'Install',header_title:'Privacy Policy — <em>FrameForge</em>',header_updated:'Last updated: August 9, 2026',s1_title:'Overview',s1_highlight:'FrameForge does NOT collect, store, or transmit any personal data.',s1_highlight_sub:'All image processing happens entirely within your browser. Your photos, EXIF data, and editing preferences never leave your device.',s1_desc:'FrameForge is a Chrome browser extension that adds professional camera-style frames to photos and displays EXIF shooting parameters. We are committed to protecting your privacy.',s2_title:'Permissions Explained',perm1_desc:'Used to save your editor preferences on your device.',perm1_purpose:'Save editor preferences (selected template, export settings, custom text presets)',perm1_data:'Template ID, font settings, color values, export format preferences',perm1_location:"Chrome's local storage on your device only",perm1_transmit:'Nothing is transmitted to any server',perm2_desc:'Required to temporarily store high-resolution photos (up to 50MB) when passing images between extension pages.',perm2_purpose:'Allow chrome.storage.local to exceed the default 10MB quota for large photos',perm2_data:'Photo image data (temporary, cleared after processing)',perm2_location:"Chrome's local storage on your device only",perm2_transmit:'Nothing is transmitted to any server',dt_purpose:'Purpose:',dt_data:'Data stored:',dt_location:'Location:',dt_transmit:'Transmitted:',s3_title:'What We Do NOT Do',no1:'We do NOT collect personal information',no2:'We do NOT track usage analytics',no3:'We do NOT use cookies or tracking pixels',no4:'We do NOT sell or share data with third parties',no5:'We do NOT upload your photos to any server',no6:'We do NOT require account registration',no7:'We do NOT use third-party advertising SDKs',s4_title:'Third-Party Services',s4_desc:'FrameForge does not use any third-party services. All processing happens entirely within your browser with no external API calls.',s5_title:'Data Security',s5_desc:'Since all processing occurs locally in your browser and no data is transmitted, there is minimal security risk. Your photos never leave your device.',s6_title:"Children's Privacy",s6_desc:'FrameForge is not directed at children under 13. We do not knowingly collect any data from anyone, including children.',s7_title:'Changes to This Policy',s7_desc:'We may update this privacy policy from time to time. Any changes will be posted on this page with an updated date.',s8_title:'Contact',s8_desc:'If you have questions about this privacy policy, please contact us at: <strong>zhuhong02199@gmail.com</strong>',s9_title:'Open Source',s9_desc:'FrameForge respects open-source licenses. The extension uses the following open-source libraries:',footer_rights:'All rights reserved.'}};
 
-let currentLang = 'zh';
-
-function switchLang(lang) {
-  currentLang = lang;
-  document.getElementById('langZh').classList.toggle('active', lang === 'zh');
-  document.getElementById('langEn').classList.toggle('active', lang === 'en');
-  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (i18n[lang][key]) el.textContent = i18n[lang][key];
-  });
-  document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    const key = el.getAttribute('data-i18n-html');
-    if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
-  });
-  document.title = lang === 'zh' ? '隐私政策 - FrameForge' : 'Privacy Policy - FrameForge';
+let currentLang='zh';
+function switchLang(lang){
+  currentLang=lang;
+  document.getElementById('langZh').classList.toggle('active',lang==='zh');
+  document.getElementById('langEn').classList.toggle('active',lang==='en');
+  document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.getAttribute('data-i18n');if(i18n[lang][key])el.textContent=i18n[lang][key]});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{const key=el.getAttribute('data-i18n-html');if(i18n[lang][key])el.innerHTML=i18n[lang][key]});
+  document.title=lang==='zh'?'隐私政策 - FrameForge':'Privacy Policy - FrameForge';
 }
+
+// Reveal
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)},{passive:true});
 </script>
 </body>
 </html>
