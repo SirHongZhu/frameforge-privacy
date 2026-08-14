@@ -266,6 +266,7 @@ const i18n={zh:{nav_home:'首页',nav_install:'安装扩展',header_title:'隐�
 let currentLang='zh';
 function switchLang(lang){
   currentLang=lang;
+  localStorage.setItem('frameforge-lang',lang);
   document.getElementById('langZh').classList.toggle('active',lang==='zh');
   document.getElementById('langEn').classList.toggle('active',lang==='en');
   document.documentElement.lang=lang==='zh'?'zh-CN':'en';
@@ -273,6 +274,28 @@ function switchLang(lang){
   document.querySelectorAll('[data-i18n-html]').forEach(el=>{const key=el.getAttribute('data-i18n-html');if(i18n[lang][key])el.innerHTML=i18n[lang][key]});
   document.title=lang==='zh'?'隐私政策 - FrameForge':'Privacy Policy - FrameForge';
 }
+
+/* Auto-detect language by IP geolocation */
+function initLang(){
+  // 1. Check localStorage for user's previous manual choice
+  var saved=localStorage.getItem('frameforge-lang');
+  if(saved==='zh'||saved==='en'){switchLang(saved);return}
+  // 2. First visit: detect by IP
+  fetch('https://ipapi.co/json/',{signal:AbortSignal.timeout(3000)})
+    .then(function(r){return r.json()})
+    .then(function(data){
+      var lang=(data&&data.country_code==='CN')?'zh':'en';
+      localStorage.setItem('frameforge-lang',lang);
+      switchLang(lang);
+    })
+    .catch(function(){
+      // Fallback: browser language
+      var lang=(navigator.language&&navigator.language.startsWith('zh'))?'zh':'en';
+      localStorage.setItem('frameforge-lang',lang);
+      switchLang(lang);
+    });
+}
+initLang();
 
 // Reveal
 const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
